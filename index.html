@@ -1,0 +1,26 @@
+<h1>Worker communications</h1>
+<button id="inc">+</button>
+<button id="dec">-</button>
+<button id="fetch">fetch</button>
+<button id="calc-in-main">Calc in main thead</button>
+<button id="calc-in-worker">Calc in worker</button>
+<button id="json-in-main">JSON in main thead</button>
+<button id="json-in-worker">JSON in worker</button>
+<p id="count"></p>
+<script src="main.js" type="module"></script>
+
+
+<style>
+  .anim {
+    animation: 1s infinite alternate rotate;
+    width: 100px;
+    height: 100px;
+    background: red;
+  }
+  @keyframes rotate {
+    to {
+      height: 300px;
+    }
+  }
+</style>
+<div class="anim"></div>
