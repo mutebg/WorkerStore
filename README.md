@@ -16,7 +16,7 @@ const mapStateToProps = ( {count, news}, ownProps) => ({
 })
 
 // connect component to the store
-const App = connectWorker(mapStateToProps, actions)( ({count, news, dispatch}) => {
+const App = connectWorker(mapStateToProps)( ({count, news, dispatch}) => {
     <div><h1>{count}</h1></div>
     <button onClick={dispatch('inc')}>+1</button>
     <button onClick={dispatch('dec')}>-1</button>

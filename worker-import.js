@@ -1,8 +1,6 @@
 
 function workerImport(initState, actions) {
 
-  console.log(actions);
-
   let state = initState;
 
   function setState(update, overwrite = false) {
