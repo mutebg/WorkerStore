@@ -1,0 +1,41 @@
+{
+  "name": "worker-store",
+  "version": "0.0.0-semantically-released",
+  "description": "Redux like store running in webworker",
+  "main": "dist/index.js",
+  "engines": {
+    "node": "> 4",
+    "npm": "> 3"
+  },
+  "scripts": {
+    "add-contributor": "kcd-scripts contributors add",
+    "build": "kcd-scripts build",
+    "lint": "kcd-scripts lint",
+    "test": "kcd-scripts test",
+    "test:update": "npm test -- --updateSnapshot --coverage",
+    "validate": "kcd-scripts validate",
+    "setup": "npm install && npm run validate -s",
+  },
+  "files": ["dist"],
+  "keywords": [],
+  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "kcd-scripts": "^0.27.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js"
+  },
+  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kentcdodds/worker-store.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kentcdodds/worker-store/issues"
+  },
+  "homepage": "https://github.com/kentcdodds/worker-store#readme"
+}
