@@ -2,40 +2,57 @@
   "name": "worker-store",
   "version": "0.0.0-semantically-released",
   "description": "Redux like store running in webworker",
+  "source": "src/index.js",
+  "module": "dist/index.es.js",
   "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
   "engines": {
     "node": "> 4",
     "npm": "> 3"
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
-    "build": "kcd-scripts build",
+    "build": "npm-run-all --silent -p build:*",
+    "build:main": "microbundle",
+    "build:integrationsreact": "microbundle src/integrations/react.js -o react.js -f cjs",
+    "build:integrationspreact": "microbundle src/integrations/preact.js -o preact.js -f cjs",
+    "build:worker": "microbundle src/worker.js -o worker.js -f cjs",
+    "dev": "microbundle watch",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "test:update": "npm test -- --updateSnapshot --coverage",
     "validate": "kcd-scripts validate",
-    "setup": "npm install && npm run validate -s",
+    "setup": "npm install && npm run validate -s"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "kcd-scripts": "^0.27.0",
+    "microbundle": "^0.2.4",
+    "npm-run-all": "^4.1.2",
+    "preact": "^8.2.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js"
   },
-  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kentcdodds/worker-store.git"
+    "url": "https://github.com/mutebg/worker-store.git"
   },
   "bugs": {
-    "url": "https://github.com/kentcdodds/worker-store/issues"
+    "url": "https://github.com/mutebg/worker-store/issues"
   },
-  "homepage": "https://github.com/kentcdodds/worker-store#readme"
+  "homepage": "https://github.com/mutebg/worker-store#readme"
 }

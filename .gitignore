@@ -10,3 +10,9 @@ dist
 # when working with contributors
 package-lock.json
 yarn.lock
+/preact.js
+/preact.js.map
+/react.js
+/react.js.map
+/worker.js
+/worker.js.map

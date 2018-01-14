@@ -1,20 +1,25 @@
-import React from 'react'
+import React from 'react';
 
 const CONTEXT_TYPES = {
-  store: () => {},
-}
+	store: () => {}
+};
 
 export const connect = selector => ComponentToWrap => {
+
   class StoreComponent extends React.Component {
-    state = {}
+
+    constructor(props, context){
+      super(props, context)
+      this.state = {};
+    }
 
     componentDidMount() {
       const {subscribe} = this.context.store
-      this.unsubscribe = subscribe(storeState => {
-        this.setState({
-          state: selector(storeState, this.props),
+      if  ( subscribe ) {
+        this.unsubscribe = subscribe(storeState => {
+          this.setState(selector(storeState, this.props))
         })
-      })
+      }
     }
 
     componentWillUnMount() {
@@ -22,25 +27,29 @@ export const connect = selector => ComponentToWrap => {
     }
 
     render() {
-      return (
-        <ComponentToWrap
-          {...this.props}
-          {...this.state}
-          dispatch={this.context.store.dispatch}
-        />
-      )
-    }
+			return React.createElement(
+				ComponentToWrap,
+				Object.assign(
+					{ dispatch: this.context.store.dispatch},
+					this.props,
+					this.state
+				)
+			);
+	  }
   }
-  StoreComponent.contextTypes = CONTEXT_TYPES
-  return StoreComponent
+	StoreComponent.contextTypes = CONTEXT_TYPES;
+	return StoreComponent;
 }
 
 export class Provider extends React.Component {
-  getChildContext() {
-    return {store: this.props.store}
+
+	getChildContext() {
+    const { store } = this.props
+    return { store }
   }
   render() {
     return React.Children.only(this.props.children)
   }
 }
-Provider.childContextTypes = CONTEXT_TYPES
+
+Provider.childContextTypes = CONTEXT_TYPES;

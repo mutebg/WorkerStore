@@ -1,5 +1,6 @@
-export const createStore = worker => {
+export const createStore = (initState, worker) => {
   let listeners = []
+  let lastState = initState
 
   const unsubscribe = listener => {
     let out = []
@@ -14,11 +15,15 @@ export const createStore = worker => {
   }
 
   const subscribe = listener => {
-    listeners.push(listener)
+    listeners.push(listener);
+    if ( lastState ) {
+      listener(lastState);
+    }
     return () => unsubscribe(listener)
   }
 
   worker.addEventListener('message', e => {
+    lastState = e.data;
     listeners.forEach(listener => listener(e.data))
   })
 
@@ -26,7 +31,14 @@ export const createStore = worker => {
     worker.postMessage({actionName, args})
   }
 
+  // dispatch initial state
+  dispatch('@init', initState);
+
+  const getState = () => lastState;
+
+
   return {
+    getState,
     dispatch,
     subscribe,
   }
