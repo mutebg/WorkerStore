@@ -1,4 +1,5 @@
 # Worker-Store
+
 Global state container running inside a WebWorker.
 A similar idea to Redux, besides the "reducers" run inside WebWorker.
 To do that, dispatch sends only the name of the actions and payload.
@@ -10,10 +11,25 @@ That is the easiest way to achieve communication between the worker and main thr
 npm install --save worker-store
 ```
 
+## Documentaion
+
+* Getting started
+* API
+  * createStore
+  * runStore
+  * Provider, connect ( React, Preact integration )
+
+* Examples
+  * Vanilla JS
+  * React
+  * Preact
+
 ## Usage
+
 You need worker loader, something like https://github.com/webpack-contrib/worker-loader
 
 In your app.js
+
 ```
 import { createStore } from 'worker-store';
 import { Provider, connect  } from 'worker-store/react';
@@ -49,10 +65,11 @@ export default () => (
 ```
 
 Inside your store.worker.js
-```
-import { runWorker  } from 'worker-store/worker';
 
-runWorker({
+```
+import { runStore } from 'worker-store/worker';
+
+runStore({
   inc: (state) => ({count: state.count + 1}),
   dec: (state) => ({count: state.count - 1}),
   fetch: (state, payload) => fetch('https://jsonplaceholder.typicode.com/posts/' + payload)

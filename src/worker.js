@@ -1,32 +1,33 @@
-export function runWorker(publicActions) {
+export function runStore(publicActions) {
   let state;
 
   const privateActions = {
-    '@init': (state, payload) => payload
-  }
-  const actions = Object.assign( privateActions, publicActions );
-
+    "@init": (currentState, payload) => payload
+  };
+  const actions = Object.assign(privateActions, publicActions);
 
   function setState(update, overwrite = false) {
-  	return state = overwrite ? update : Object.assign( Object.assign({}, state), update);
+    return (state = overwrite
+      ? update
+      : Object.assign(Object.assign({}, state), update));
   }
 
-  function sendNextState({actionName, args}) {
+  function sendNextState({ actionName, args }) {
     let nextStateResult = actions[actionName](state, ...args);
-    if ( typeof nextStateResult == 'function' ) {
+    if (typeof nextStateResult === "function") {
       nextStateResult = nextStateResult();
     }
 
     if (nextStateResult.then) {
-      nextStateResult.then( s => {
-        self.postMessage( setState(s) );
-      })
+      nextStateResult.then(s => {
+        self.postMessage(setState(s));
+      });
     } else {
-      self.postMessage( setState(nextStateResult) );
+      self.postMessage(setState(nextStateResult));
     }
   }
 
-  self.addEventListener('message', (e) => {
-    sendNextState(e.data);
-  }, false);
+  self.onmessage = ({ data }) => sendNextState(data);
 }
+
+export default null;
