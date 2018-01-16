@@ -15,8 +15,10 @@ npm install --save worker-store
 
 * Getting started
 * API
+
   * createStore
   * runStore
+  * put
   * Provider, connect ( React, Preact integration )
 
 * Examples
@@ -67,14 +69,27 @@ export default () => (
 Inside your store.worker.js
 
 ```
-import { runStore } from 'worker-store/worker';
+import { runStore, put } from 'worker-store/worker';
 
 runStore({
   inc: (state) => ({count: state.count + 1}),
   dec: (state) => ({count: state.count - 1}),
   fetch: (state, payload) => fetch('https://jsonplaceholder.typicode.com/posts/' + payload)
       .then( res => res.json())
-      .then( json => ({news: json}))
+      .then( json => ({news: json})),
+  generator: function*(state) {
+    try {
+      yield put({ status: "loading" });
+      const response = yield fetch(
+        "https://jsonplaceholder.typicode.com/posts/1"
+      );
+      const news = yield response.json();
+      yield put({ news: news });
+      yield put({ status: "done" });
+    } catch (err) {
+      yield put({status: "loaded", error: true });
+    }
+  }
 })
 ```
 
