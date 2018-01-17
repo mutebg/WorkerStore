@@ -1,7 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Worker-Store](#worker-store)
+  - [Installation](#installation)
+  - [Documentaion](#documentaion)
+  - [Usage](#usage)
+  - [Inspiration](#inspiration)
+  - [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Worker-Store
 
 Global state container running inside a WebWorker.
-A similar idea to Redux, besides the "reducers" run inside WebWorker.
+A similar idea to Redux, besides the action-reducers run inside WebWorker.
 To do that, dispatch sends only the name of the actions and payload.
 That is the easiest way to achieve communication between the worker and main thread.
 
@@ -16,15 +29,16 @@ npm install --save worker-store
 * Getting started
 * API
 
-  * createStore
-  * runStore
+  * dispatch ( first: action name, rest action function arguments )
+  * createStore ( first: initial state, second: worker )
+  * runStore: object of actions
   * put
   * Provider, connect ( React, Preact integration )
 
 * Examples
   * Vanilla JS
-  * React
-  * Preact
+  * React https://codesandbox.io/s/zrlpk96vpl
+  * Preact 
 
 ## Usage
 
