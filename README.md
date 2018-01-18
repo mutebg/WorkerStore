@@ -1,16 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [Worker-Store](#worker-store)
-  - [Installation](#installation)
-  - [Documentaion](#documentaion)
-  - [Usage](#usage)
-  - [Inspiration](#inspiration)
-  - [LICENSE](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 * [Worker-Store](#worker-store)
   * [Installation](#installation)
   * [Documentaion](#documentaion)
