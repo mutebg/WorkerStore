@@ -22,13 +22,12 @@ npm install --save worker-store
 
 * Getting started
 * API
-
-  * [createStore][#createstore]
-  * [dispatch][#dispatch]
-  * [Provider][#provider]
-  * [connect][#connect]
-  * [runStore][#runstore]
-  * [put][#put]
+  * createStore
+  * dispatch
+  * Provider
+  * connect
+  * runStore
+  * put
 
 * Examples
   * Vanilla
