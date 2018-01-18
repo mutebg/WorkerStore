@@ -1,7 +1,7 @@
 {
   "name": "worker-store",
-  "version": "0.0.0-semantically-released",
-  "description": "Store inside webworker",
+  "version": "0.0.2",
+  "description": "Store Container inside webworker",
   "source": "src/index.js",
   "module": "dist/index.es.js",
   "main": "dist/index.js",
@@ -26,9 +26,19 @@
     "validate": "kcd-scripts validate",
     "setup": "npm install && npm run validate -s",
     "precommit": "kcd-scripts precommit",
-    "semantic-release": "semantic-release"
+    "semantic-release":
+      "semantic-release pre && npm publish && semantic-release post"
   },
-  "files": ["dist"],
+  "files": [
+    "src",
+    "dist",
+    "preact.js",
+    "preact.js.map",
+    "react.js",
+    "react.js.map",
+    "worker.js",
+    "worker.js.map"
+  ],
   "keywords": [],
   "author": "Stoyan Delev <i@stoyandelev.com> (http://stoyandelev.com/)",
   "license": "MIT",

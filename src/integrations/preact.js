@@ -4,10 +4,9 @@ export const connect = selector => ComponentToWrap => {
   class StoreComponent extends Component {
     componentDidMount() {
       const {subscribe} = this.context.store
-      if (subscribe) {
+      if (subscribe && selector) {
         this.unsubscribe = subscribe(storeState => {
-          const nextState = selector(storeState, this.props)
-          this.setState(nextState)
+          this.setState(selector(storeState, this.props))
           // TODO
           this.forceUpdate()
         })
@@ -21,11 +20,7 @@ export const connect = selector => ComponentToWrap => {
     render(props, state) {
       return h(
         ComponentToWrap,
-        Object.assign(
-          {a: true, dispatch: this.context.store.dispatch},
-          props,
-          state,
-        ),
+        Object.assign({dispatch: this.context.store.dispatch}, props, state),
       )
     }
   }
