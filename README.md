@@ -11,16 +11,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-* [Worker-Store](#worker-store)
-  * [Installation](#installation)
-  * [Documentaion](#documentaion)
-  * [Usage](#usage)
-  * [Inspiration](#inspiration)
-  * [LICENSE](#license)
-
 # Worker-Store
 
-1kb state container running inside a WebWorker.
+1kb state container running inside WebWorker.
 A similar idea to Redux, besides the action-reducers run inside WebWorker.
 To do that, dispatch sends only the name of the actions and payload.
 That is the easiest way to achieve communication between the worker and main thread.
@@ -35,15 +28,14 @@ npm install --save worker-store
 
 * Getting started
 * API
-
+  * [runStore][#runstore]
+  * [put][#put]
   * [createStore][#createstore]
   * [dispatch][#dispatch]
   * [Provider][#provider]
   * [connect][#connect]
-  * [runStore][#runstore]
-  * [put][#put]
 
-* Examples
+- Examples
   * Vanilla
   * React
   * Preact
@@ -97,24 +89,28 @@ Inside your store.worker.js
 ```js
 import { runStore, put } from "worker-store/worker";
 
+// runStore receive objet of actions
+// every action receive current state as first parameter
+// and rest as parameters from dispatch function
+// action must return the next state ( or part of it )
 runStore({
   inc: state => ({ count: state.count + 1 }),
   dec: state => ({ count: state.count - 1 }),
+  // can return Promise which resolves into next state
   fetch: (state, payload) =>
     fetch("https://jsonplaceholder.typicode.com/posts/" + payload)
       .then(res => res.json())
       .then(json => ({ news: json })),
+  // or generator function which yield next state
   generator: function*(state) {
     try {
-      // using yield put to update the state
+      // using yield and put to update the state
       yield put({ status: "loading" });
       const response = yield fetch(
         "https://jsonplaceholder.typicode.com/posts/1"
       );
       const news = yield response.json();
-      // using yield put to update the state
-      yield put({ news: news });
-      yield put({ status: "done" });
+      yield put({ news: news, status: "done" });
     } catch (err) {
       yield put({ status: "loaded", error: true });
     }
