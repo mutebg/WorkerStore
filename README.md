@@ -16,7 +16,6 @@
 1kb state container running inside WebWorker.
 A similar idea to Redux, besides the action-reducers run inside WebWorker.
 To do that, dispatch sends only the name of the actions and payload.
-That is the easiest way to achieve communication between the worker and main thread.
 
 ## Installation
 
@@ -24,21 +23,7 @@ That is the easiest way to achieve communication between the worker and main thr
 npm install --save worker-store
 ```
 
-## Documentaion
-
-* Getting started
-* API
-  * [runStore][#runstore]
-  * [put][#put]
-  * [createStore][#createstore]
-  * [dispatch][#dispatch]
-  * [Provider][#provider]
-  * [connect][#connect]
-
-- Examples
-  * Vanilla
-  * React
-  * Preact
+## [Documentaion](./docs)
 
 ## Usage
 
@@ -84,7 +69,7 @@ export default () => (
 )
 ```
 
-Inside your store.worker.js
+Inside your web worker: store.worker.js
 
 ```js
 import { runStore, put } from "worker-store/worker";
@@ -92,7 +77,7 @@ import { runStore, put } from "worker-store/worker";
 // runStore receive objet of actions
 // every action receive current state as first parameter
 // and rest as parameters from dispatch function
-// action must return the next state ( or part of it )
+// action must return the next state  or part of it
 runStore({
   inc: state => ({ count: state.count + 1 }),
   dec: state => ({ count: state.count - 1 }),
@@ -120,7 +105,9 @@ runStore({
 
 ## Inspiration
 
-Inspired by https://github.com/developit/unistore
+Inspired by
+https://github.com/developit/unistore
+https://github.com/developit/stockroom
 
 ## LICENSE
 

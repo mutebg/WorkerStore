@@ -1,16 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Documentation](#documentation)
+  - [Main thread API](#main-thread-api)
+  - [WebWorker API](#webworker-api)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Documentation
 
-* Getting started
-* [API](#api)
-  * [createStore][#createstore]
-  * [dispatch][#dispatch]
-  * [Provider][#provider]
-  * [connect][#connect]
-  * [runStore][#runstore]
-  * [put][#put]
-* Examples
-
-## API
+##  Main thread API
 
 ### createStore(initialState, worker)
 
@@ -37,10 +37,11 @@ store.subscribe(state => console.log("new state", state));
 ### `dispatch(action, payload)`
 
 Dispatches an action is the only way to trigger a state change.
+
 **Arguments**
 
-1. action function name
-2. payload to action function
+1. Action name
+2. Payload
 
 **Example**
 
@@ -63,6 +64,7 @@ Makes the store available to the connect() calls in the component hierarchy belo
 ### connect
 
 Connects a React/Preact component to the store.
+
 **Arguments**
 
 1. [mapStateToProps(state, [ownProps]): stateProps](Function): If this argument is specified, the new component will subscribe to store updates. This means that any time the store is updated, mapStateToProps will be called. The results of mapStateToProps must be a plain object, which will be merged into the component’s props. If you don't want to subscribe to store updates, pass null or undefined in place of mapStateToProps.
@@ -74,14 +76,16 @@ const mapStateToProps = ( state, ownProps) => ({
 const App = connect(mapStateToProps)(({count}) => <h1>{count}/h1>);
 ```
 
+## WebWorker API
+
 ### runStore
 
-Object with actions
-Every action acceps current state and parameters passed from dispatch function
+Object with actions. Every action accepts current state and parameters passed from dispatch function
 
 ### put
 
 Can be used inside generator to update state
+
 **Parameters**
 
 * new state **[object]**
