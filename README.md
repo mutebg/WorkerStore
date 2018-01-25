@@ -6,6 +6,7 @@
   - [Installation](#installation)
   - [Documentaion](#documentaion)
   - [Usage](#usage)
+  - [Debug](#debug)
   - [Inspiration](#inspiration)
   - [LICENSE](#license)
 
@@ -81,11 +82,13 @@ import { runStore, put } from "worker-store/worker";
 runStore({
   inc: state => ({ count: state.count + 1 }),
   dec: state => ({ count: state.count - 1 }),
+
   // can return Promise which resolves into next state
   fetch: (state, payload) =>
     fetch("https://jsonplaceholder.typicode.com/posts/" + payload)
       .then(res => res.json())
       .then(json => ({ news: json })),
+
   // or generator function which yield next state
   generator: function*(state) {
     try {
@@ -100,6 +103,27 @@ runStore({
       yield put({ status: "loaded", error: true });
     }
   }
+});
+```
+
+## Debug
+
+You can use [kuker](https://github.com/krasimir/kuker) to debug state and actions,
+very similar way redux-dev-tools does
+
+```js
+store.subscribe(({ state, action }) => {
+  window.postMessage(
+    {
+      kuker: true,
+      type: "change state",
+      origin: "none",
+      label: action,
+      time: new Date().getTime(),
+      state: state
+    },
+    "*"
+  );
 });
 ```
 

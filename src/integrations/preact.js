@@ -5,8 +5,8 @@ export const connect = selector => ComponentToWrap => {
     componentDidMount() {
       const {subscribe} = this.context.store
       if (subscribe && selector) {
-        this.unsubscribe = subscribe(storeState => {
-          this.setState(selector(storeState, this.props))
+        this.unsubscribe = subscribe(({state}) => {
+          this.setState(selector(state, this.props))
           // TODO
           this.forceUpdate()
         })

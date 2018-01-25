@@ -10,7 +10,7 @@
 
 # Documentation
 
-##  Main thread API
+## Main thread API
 
 ### createStore(initialState, worker)
 
@@ -31,7 +31,7 @@ const initState = { count: 0, news: [] };
 const store = createStore({}, new Worker());
 
 store.dispatch("INCREMENT");
-store.subscribe(state => console.log("new state", state));
+store.subscribe(message => console.log("new state", message.state));
 ```
 
 ### `dispatch(action, payload)`

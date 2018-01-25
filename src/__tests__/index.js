@@ -1,5 +1,4 @@
 import {createStore} from '../'
-import {runStore} from '../worker'
 
 const mockWorkerInstance = {
   postMessage: () => jest.fn(),
@@ -31,22 +30,9 @@ test('Dispatch sends data to worker', () => {
 test('Subscribe receive current store state on subscribe', () => {
   const {subscribe} = store
   subscribe(data => {
-    expect(data).toEqual({count: 1})
+    expect(data.state).toEqual({count: 1})
   })
 })
 
 ////
 // TEST WORKER
-
-const self = {
-  postMessage: () => jest.fn(),
-}
-
-runStore({
-  inc: ({count}) => ({count: count + 1}),
-  dec: ({count}) => ({count: count - 1}),
-})
-
-test('TODO: Worker', () => {
-  expect(self).toBeDefined()
-})

@@ -1,4 +1,5 @@
 let state
+let lastAction
 const PUT = 'PUT'
 
 function isGenerator(obj) {
@@ -6,9 +7,10 @@ function isGenerator(obj) {
 }
 
 function setState(newState, overwrite = false) {
-  return (state = overwrite
+  state = overwrite
     ? newState
-    : Object.assign(Object.assign({}, newState), update))
+    : Object.assign(Object.assign({}, state), newState)
+  return state
 }
 
 export function put(newState) {
@@ -16,7 +18,10 @@ export function put(newState) {
 }
 
 function postState(s) {
-  self.postMessage(s)
+  self.postMessage({
+    state: s,
+    action: lastAction,
+  })
 }
 
 function coroutine(generator) {
@@ -40,6 +45,7 @@ export function runStore(publicActions) {
   const actions = Object.assign(privateActions, publicActions)
 
   function sendNextState({actionName, args}) {
+    lastAction = actionName
     let nextStateResult = actions[actionName](state, ...args)
     if (typeof nextStateResult === 'function') {
       nextStateResult = nextStateResult()
