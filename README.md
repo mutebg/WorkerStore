@@ -3,6 +3,7 @@
 
 
 - [Worker-Store](#worker-store)
+  - [Examples](#examples)
   - [Installation](#installation)
   - [Documentaion](#documentaion)
   - [Usage](#usage)
@@ -18,13 +19,24 @@
 A similar idea to Redux, besides the action-reducers run inside WebWorker.
 To do that, dispatch sends only the name of the actions and payload.
 
+Offload expensive work to a WebWorker might improve significant performance.
+While Main ( UI ) thread can be blocked from expensive operations, the WebWorker solves that like messaging results ( state ) of the operations to UI thread.
+
+## Examples
+
+[React example](./examples/react)
+
+[Live demo](https://workerstore.surge.sh/)
+
 ## Installation
 
 ```sh
 npm install --save worker-store
 ```
 
-## [Documentaion](./docs)
+## Documentaion
+
+[API documentation](./docs)
 
 ## Usage
 

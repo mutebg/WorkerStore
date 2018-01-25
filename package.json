@@ -1,6 +1,6 @@
 {
   "name": "worker-store",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Store Container inside webworker",
   "source": "src/index.js",
   "module": "dist/index.es.js",
@@ -26,8 +26,7 @@
     "validate": "kcd-scripts validate",
     "setup": "npm install && npm run validate -s",
     "precommit": "kcd-scripts precommit",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "./node_modules/.bin/semantic-release --no-ci"
   },
   "files": [
     "src",
@@ -58,7 +57,8 @@
     "dist",
     "worker.js",
     "react.js",
-    "preact.js"
+    "preact.js",
+    "examples/**/*.js"
   ],
   "repository": {
     "type": "git",
