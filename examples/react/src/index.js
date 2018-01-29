@@ -42,7 +42,7 @@ const App = connect(mapStateToProps)(({count, news, status, dispatch}) => {
       <button onClick={() => dispatch('inc')}>+1</button>
       <button onClick={() => dispatch('dec')}>-1</button>
       <button onClick={() => dispatch('delay')}>inc with delay</button>
-      <h1>Couner: {count}</h1>
+      <h1>Count: {count}</h1>
 
       <hr />
 
